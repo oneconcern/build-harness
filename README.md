@@ -1,4 +1,4 @@
-# Harness
+# Build Harness
 
 Inspired by: https://github.com/cloudposse/build-harness
 
@@ -15,7 +15,7 @@ Goal: encapsulate logic around common software tasks using `make` in a way that 
 At the top of your Makefile, include the harness:
 
 ```makefile
--include $(shell curl -sSL -o .build-harness "https://raw.githubusercontent.com/oneconcern/harness/main/Makefile.harness"; echo .build-harness)
+-include $(shell curl -sSL -o .build-harness "https://raw.githubusercontent.com/oneconcern/build-harness/main/Makefile.harness"; echo .build-harness)
 ```
 
 Add the initialized build harness to your `.gitignore`:
@@ -23,7 +23,6 @@ Add the initialized build harness to your `.gitignore`:
 ```gitignore
 .build-harness
 build-harness
-harness
 ```
 
 ### Initialization

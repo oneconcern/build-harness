@@ -6,11 +6,11 @@ python/check: python/fmt python/lint python/test
 
 ## Lint Python code
 python/lint: python/typecheck
-	@echo "Linting python code"
+	find . -type f -name "*.py" | xargs -n 1 flake8
 
 ## Typecheck Python code
 python/typecheck:
-	@echo "Typechecking python code"
+	find . -type f -name "*.py" | xargs -n 1 mypy
 
 ## Run Python unit tests
 python/test:
