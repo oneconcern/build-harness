@@ -1,16 +1,16 @@
 PYTHON := $(shell which python 2>/dev/null)
-
+PACKAGE ?= src
 ## Runs all Python checks
 python/check: python/fmt python/lint python/test
 	@echo "Checking all python code"
 
 ## Lint Python code
 python/lint: python/typecheck
-	find . -type f -name "*.py" | xargs -n 1 flake8
+	@flake8 $(PACKAGE)
 
 ## Typecheck Python code
 python/typecheck:
-	find . -type f -name "*.py" | xargs -n 1 mypy
+	@mypy -p $(PACKAGE)
 
 ## Run Python unit tests
 python/test:
