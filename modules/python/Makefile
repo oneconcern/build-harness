@@ -17,7 +17,7 @@ python/typecheck:
 
 ## Run Python unit tests
 python/test:
-	@echo "Testing python code"
+	@pytest -v --log-level=DEBUG --junit-xml=tests/junit/results.xml --cov=$(PACKAGE) --cov-report=html --cov-report=xml --cov-report=term --durations=10 tests/unit
 
 ## Format Python code
 python/fmt:
