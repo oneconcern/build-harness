@@ -1,8 +1,7 @@
 ## Use DOCKER_IMAGE_NAME envvar to specify docker image with tags
 ## User ARGS to pass arguments
 DOCKER_BUILD_PATH ?= .
-DOCKER_BUILD_FLAGS ?= --no-cache
-DOCKER_IMAGE_NAME ?= tests
+DOCKER_BUILD_FLAGS ?= --pull --cache-from $(DOCKER_IMAGE_NAME)
 DOCKER_FILE ?= ./Dockerfile
 
 ## Build docker image
@@ -18,26 +17,26 @@ docker/build:
 ## Promote $SOURCE_DOCKER_REGISTRY/$IMAGE_NAME:$SOURCE_VERSION to $TARGET_DOCKER_REGISTRY/$IMAGE_NAME:$TARGET_VERSION
 docker/image/promote/local:
 	$(call assert-set,DOCKER)
-	$(call assert-set,IMAGE_NAME)
+	$(call assert-set,DOCKER_IMAGE_NAME)
 	$(call assert-set,SOURCE_DOCKER_REGISTRY)
 	$(call assert-set,SOURCE_VERSION)
 	$(call assert-set,TARGET_DOCKER_REGISTRY)
 	$(call assert-set,TARGET_VERSION)
-	@"$(DOCKER)" tag $(SOURCE_DOCKER_REGISTRY)/$(IMAGE_NAME):$(SOURCE_VERSION) $(TARGET_DOCKER_REGISTRY)/$(IMAGE_NAME):$(TARGET_VERSION)
+	@"$(DOCKER)" tag $(SOURCE_DOCKER_REGISTRY)/$(DOCKER_IMAGE_NAME):$(SOURCE_VERSION) $(TARGET_DOCKER_REGISTRY)/$(DOCKER_IMAGE_NAME):$(TARGET_VERSION)
 
 ## Pull $SOURCE_DOCKER_REGISTRY/$IMAGE_NAME:$SOURCE_VERSION and promote to $TARGET_DOCKER_REGISTRY/$IMAGE_NAME:$TARGET_VERSION
 docker/image/promote/remote:
 	$(call assert-set,DOCKER)
-	$(call assert-set,IMAGE_NAME)
+	$(call assert-set,DOCKER_IMAGE_NAME)
 	$(call assert-set,SOURCE_DOCKER_REGISTRY)
 	$(call assert-set,SOURCE_VERSION)
-	@"$(DOCKER)" pull $(SOURCE_DOCKER_REGISTRY)/$(IMAGE_NAME):$(SOURCE_VERSION)
+	@"$(DOCKER)" pull $(SOURCE_DOCKER_REGISTRY)/$(DOCKER_IMAGE_NAME):$(SOURCE_VERSION)
 	@$(SELF) -s docker/image/promote/local
 
 ## Push $TARGET_DOCKER_REGISTRY/$IMAGE_NAME:$TARGET_VERSION
 docker/image/push:
 	$(call assert-set,DOCKER)
-	$(call assert-set,IMAGE_NAME)
+	$(call assert-set,DOCKER_IMAGE_NAME)
 	$(call assert-set,TARGET_DOCKER_REGISTRY)
 	$(call assert-set,TARGET_VERSION)
-	"$(DOCKER)" push $(TARGET_DOCKER_REGISTRY)/$(IMAGE_NAME):$(TARGET_VERSION)
+	"$(DOCKER)" push $(TARGET_DOCKER_REGISTRY)/$(DOCKER_IMAGE_NAME):$(TARGET_VERSION)
