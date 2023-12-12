@@ -1,7 +1,10 @@
-## Use DOCKER_IMAGE_NAME envvar to specify docker image with tags
 ## User ARGS to pass arguments
 DOCKER_BUILD_PATH ?= .
-DOCKER_BUILD_FLAGS ?= --pull --cache-from $(DOCKER_IMAGE_NAME)
+ifdef DOCKER_CACHE_IMAGE
+DOCKER_BUILD_FLAGS ?= --pull --cache-from $(DOCKER_CACHE_IMAGE)
+else
+DOCKER_BUILD_FLAGS ?= --pull
+endif
 DOCKER_FILE ?= ./Dockerfile
 
 ## Build docker image
