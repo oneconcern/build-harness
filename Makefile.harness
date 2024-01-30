@@ -1,7 +1,7 @@
 ifeq ($(BUILD_HARNESS_TEMPLATES_MAKEFILE_GUARD),)
 BUILD_HARNESS_TEMPLATES_MAKEFILE_GUARD := included
 
-export SHELL ?= /bin/bash
+export SHELL = /bin/bash
 export PWD = $(shell pwd)
 export BUILD_HARNESS_ORG ?= oneconcern
 export BUILD_HARNESS_PROJECT ?= build-harness
