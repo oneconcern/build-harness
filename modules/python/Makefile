@@ -10,23 +10,23 @@ python/check: python/fmt python/lint python/test
 
 ## Lint Python code
 python/lint: python/typecheck
-	@$(POETRY) run flake8 $(PY_FILES)
-	@$(POETRY) run isort --check-only --diff $(PACKAGE)
+	@flake8 $(PY_FILES)
+	@isort --check-only --diff $(PACKAGE)
 
 ## Typecheck Python code
 python/typecheck:
-	@$(POETRY) run mypy $(PY_FILES)
+	@mypy $(PY_FILES)
 
 ## Run Python unit tests
 python/test:
-	@$(POETRY) run pytest $(PYTEST_FILES)
+	@pytest $(PYTEST_FILES)
 
 ## Format Python code
 python/fmt:
-	@$(POETRY) run isort $(PY_FILES)
-	@$(POETRY) run black $(PY_FILES)
+	@isort $(PY_FILES)
+	@black $(PY_FILES)
 
 ## Install Python dependencies with Poetry
 python/install:
-	$(call assert-set,POETRY)
-	$(POETRY) install
+	@$(call assert-set,POETRY)
+	@$(POETRY) install
