@@ -9,9 +9,11 @@ SHELL = /bin/bash
 DEFAULT_HELP_TARGET ?= help/short
 HELP_FILTER ?= .*
 
-green = $(shell echo -e '\x1b[32;01m$1\x1b[0m')
-yellow = $(shell echo -e '\x1b[33;01m$1\x1b[0m')
-red = $(shell echo -e '\x1b[33;31m$1\x1b[0m')
+# Support for colorized output
+GREEN  := $(shell tput -Txterm setaf 2)
+YELLOW := $(shell tput -Txterm setaf 3)
+WHITE  := $(shell tput -Txterm setaf 7)
+RESET  := $(shell tput -Txterm sgr0)
 
 # Ensures that a variable is defined and non-empty
 define assert-set
