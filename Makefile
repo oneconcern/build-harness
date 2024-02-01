@@ -26,11 +26,10 @@ export BUILD_HARNESS_AUTO_INIT := false
 export DEBUG ?=
 
 # Support for colorized output
-RED := $(shell echo -e "\033[31m")
-GREEN := $(shell echo -e "\033[32m")
-YELLOW := $(shell echo -e "\033[33m")
-BLUE := $(shell echo -e "\033[34m")
-RESET := $(shell echo -e "\033[0m")
+GREEN  := $(shell tput -Txterm setaf 2)
+YELLOW := $(shell tput -Txterm setaf 3)
+WHITE  := $(shell tput -Txterm setaf 7)
+RESET  := $(shell tput -Txterm sgr0)
 
 ifeq ($(CURDIR),$(realpath $(BUILD_HARNESS_PATH)))
 # Only execute this section if we're actually in the `build-harness` project itself
