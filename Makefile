@@ -25,6 +25,13 @@ export BUILD_HARNESS_AUTO_INIT := false
 # Debug should not be defaulted to a value because some cli consider any value as `true` (e.g. helm)
 export DEBUG ?=
 
+# Support for colorized output
+RED := $(shell echo -e "\033[31m")
+GREEN := $(shell echo -e "\033[32m")
+YELLOW := $(shell echo -e "\033[33m")
+BLUE := $(shell echo -e "\033[34m")
+RESET := $(shell echo -e "\033[0m")
+
 ifeq ($(CURDIR),$(realpath $(BUILD_HARNESS_PATH)))
 # Only execute this section if we're actually in the `build-harness` project itself
 # List of targets the `readme` target should call before generating the readme
