@@ -25,12 +25,6 @@ export BUILD_HARNESS_AUTO_INIT := false
 # Debug should not be defaulted to a value because some cli consider any value as `true` (e.g. helm)
 export DEBUG ?=
 
-# Support for colorized output
-GREEN  := $(shell tput -Txterm setaf 2)
-YELLOW := $(shell tput -Txterm setaf 3)
-WHITE  := $(shell tput -Txterm setaf 7)
-RESET  := $(shell tput -Txterm sgr0)
-
 ifeq ($(CURDIR),$(realpath $(BUILD_HARNESS_PATH)))
 # Only execute this section if we're actually in the `build-harness` project itself
 # List of targets the `readme` target should call before generating the readme
