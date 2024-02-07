@@ -9,10 +9,9 @@ python/check: python/fmt python/lint python/test
 	@exit 0
 
 ## Lint Python code
-python/lint: python/typecheck
+python/lint: python/typecheck python/check-fmt
 	@echo "${GREEN}Running flake8 lint checks${RESET}"
 	@flake8 $(PY_FILES)
-	@isort --check-only --diff $(PACKAGE)
 
 ## Typecheck Python code
 python/typecheck:
