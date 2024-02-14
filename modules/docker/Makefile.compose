@@ -1,0 +1,7 @@
+COMPOSE_FILE ?= ./docker-compose.yaml
+
+## Start from compose file
+docker/compose/start:
+	$(call assert-set,DOCKER_COMPOSE)
+	"$(DOCKER_COMPOSE)" -f $(COMPOSE_FILE) up -d
+	
