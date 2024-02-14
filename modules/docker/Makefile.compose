@@ -1,7 +1,17 @@
 COMPOSE_FILE ?= ./docker-compose.yaml
 
-## Start from compose file
-docker/compose/start:
+## Run docker compose up in daemon mode
+docker/compose/up:
 	$(call assert-set,DOCKER_COMPOSE)
 	"$(DOCKER_COMPOSE)" -f $(COMPOSE_FILE) up -d
+
+## Destroy all containers
+docker/compose/down:
+	$(call assert-set,DOCKER_COMPOSE)
+	"$(DOCKER_COMPOSE)" -f $(COMPOSE_FILE) down
+
+## Restart all running containers
+docker/compose/restart:
+	$(call assert-set,DOCKER_COMPOSE)
+	"$(DOCKER_COMPOSE)" -f $(COMPOSE_FILE) restart
 	
