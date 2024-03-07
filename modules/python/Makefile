@@ -43,3 +43,8 @@ python/check-fmt:
 python/install:
 	@$(call assert-set,POETRY)
 	@$(POETRY) install
+
+## Remove all compiled python bytecode files
+python/clean:
+	@echo "${GREEN}Removing "__pycache__" directories${RESET}"
+	@find . -type d -name __pycache__ -exec rm -r {} \+
