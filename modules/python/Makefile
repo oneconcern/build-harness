@@ -37,7 +37,7 @@ python/check-fmt:
 	@isort --check $(PY_FILES)
 	@echo done
 	@echo "${GREEN}Running black format checks${RESET}"
-	@black --check $(PY_FILES)
+	@black --check --diff $(PY_FILES)
 
 ## Install Python dependencies with Poetry
 python/install:
